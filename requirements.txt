@@ -1,4 +1,7 @@
 fastapi<0.100
+python-dotenv
+python-multipart
+Pillow
 fastapi-jwt-auth==0.5.0
 pydantic<2
 alembic

@@ -87,8 +87,24 @@ class Product(Base):
         secondary=order_products,
         back_populates='products',
     ) # many to many relationship
+    images = relationship('ProductImage', back_populates='product', cascade='all, delete-orphan')
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
 
     def __repr__(self):
         return f"<Product {self.name}>"
+
+
+class ProductImage(Base):
+    __tablename__ = 'product_images'
+    id = Column(Integer, primary_key=True, index=True)
+    product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
+    filename = Column(String, nullable=False)
+    original_filename = Column(String, nullable=False)
+    is_primary = Column(Boolean, default=False, nullable=False)
+    sort_order = Column(Integer, default=0, nullable=False)
+    created_at = Column(DateTime, default=func.now())
+    product = relationship('Product', back_populates='images')
+
+    def __repr__(self):
+        return f"<ProductImage {self.id} product_id={self.product_id}>"

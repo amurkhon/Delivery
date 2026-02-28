@@ -97,6 +97,17 @@ class OrderUpdateModel(BaseModel):
         }
 
 # Product schemas
+class ProductImageResponse(BaseModel):
+    id: int
+    product_id: int
+    url: str
+    is_primary: bool
+    sort_order: int
+
+    class Config:
+        from_attributes = True
+
+
 class ProductModel(BaseModel):
     id: Optional[int] = None
     name: str
@@ -106,6 +117,7 @@ class ProductModel(BaseModel):
     updated_at: Optional[datetime] = None
     status: Optional[ProductStatus] = ProductStatus.available
     product_category: ProductCategory
+    images: Optional[List["ProductImageResponse"]] = None
 
     class Config:
         from_attributes = True
