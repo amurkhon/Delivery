@@ -1,4 +1,3 @@
-import os
 import uuid
 from pathlib import Path
 from typing import Optional
@@ -7,11 +6,8 @@ from fastapi import HTTPException, UploadFile
 from PIL import Image
 from sqlalchemy.orm import Session
 
+from config import MAX_IMAGE_SIZE_MB, UPLOAD_DIR
 from models import Product, ProductImage
-
-# Configuration (from env with defaults)
-UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
-MAX_IMAGE_SIZE_MB = int(os.getenv("MAX_IMAGE_SIZE_MB", "5"))
 MAX_IMAGES_PER_PRODUCT = 10
 THUMBNAIL_SIZE = (200, 200)
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}

@@ -1,8 +1,8 @@
 from datetime import datetime
-import os
 from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
 
+from config import JWT_SECRET_KEY
 from models import ProductCategory, ProductStatus, UserRole, OrderStatus, Volume
 
 class SignUpModel(BaseModel):
@@ -47,7 +47,7 @@ class SignInModel(BaseModel):
     )
 
 class Token(BaseModel):
-    authjwt_secret_key: str = os.getenv("JWT_SECRET_KEY", "change-this-secret")
+    authjwt_secret_key: str = JWT_SECRET_KEY
     authjwt_token_location: set = {"cookies"}
     authjwt_cookie_csrf_protect: bool = False
 
