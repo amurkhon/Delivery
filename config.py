@@ -10,8 +10,17 @@ load_dotenv()
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 IS_PRODUCTION = ENVIRONMENT == "production"
 
-# Database
-DATABASE_URL = os.getenv("DATABASE_URL")
+# Database - chosen by environment when DATABASE_URL not explicitly set
+_DATABASE_URL = os.getenv("DATABASE_URL")
+_LOCAL_DATABASE_URL = os.getenv("LOCAL_DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/delivery_db")
+_SERVER_DATABASE_URL = os.getenv("SERVER_DATABASE_URL")
+
+if _DATABASE_URL:
+    DATABASE_URL = _DATABASE_URL
+elif IS_PRODUCTION and _SERVER_DATABASE_URL:
+    DATABASE_URL = _SERVER_DATABASE_URL
+else:
+    DATABASE_URL = _LOCAL_DATABASE_URL
 
 # JWT
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "change-this-secret")
@@ -20,7 +29,7 @@ UNSAFE_JWT_DEFAULT = "change-this-secret"
 # CORS - comma-separated origins, e.g. "https://app.example.com,https://www.example.com"
 _CORS_ORIGINS_RAW = os.getenv(
     "CORS_ORIGINS",
-    "http://localhost:3000,http://72.61.116.31:3000,http://localhost:5173,http://72.61.116.31:5173",
+    "http://localhost:3000,http://localhost:5173,http://localhost:6000,http://72.61.116.31:3000,http://72.61.116.31:5173,http://72.61.116.31:6000",
 )
 CORS_ORIGINS = [o.strip() for o in _CORS_ORIGINS_RAW.split(",") if o.strip()]
 
@@ -39,7 +48,7 @@ def validate_production_config() -> None:
 
     if not DATABASE_URL:
         raise ValueError(
-            "DATABASE_URL is required in production. Set it in your environment."
+            "DATABASE_URL or SERVER_DATABASE_URL is required in production. Set it in your environment."
         )
 
     if not JWT_SECRET_KEY or JWT_SECRET_KEY == UNSAFE_JWT_DEFAULT:
