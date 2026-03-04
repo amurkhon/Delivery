@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@Amir(Khan)2002@:5432/delivery
+      - DATABASE_URL=postgresql://postgres:postgres@Amir(Khan)2002@72.61.116.31:5432/delivery
       - JWT_SECRET_KEY=${JWT_SECRET_KEY:-change-this-in-production}
       - ENVIRONMENT=production
       - CORS_ORIGINS=${CORS_ORIGINS:-http://72.61.116.31:3000,http://72.61.116.31:5173,http://72.61.116.31:6000}
