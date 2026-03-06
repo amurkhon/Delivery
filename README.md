@@ -52,7 +52,7 @@ source .env  # or export variables
 docker-compose up -d
 
 # Set JWT_SECRET_KEY and CORS_ORIGINS in .env or export before running
-export JWT_SECRET_KEY=$(python -c "import secrets; print(secrets.token_hex(32))")
+export JWT_SECRET_KEY=iu3tg6438gr8cx71987ruy1498ruy2498ruy2498ruy
 docker-compose up -d
 ```
 
