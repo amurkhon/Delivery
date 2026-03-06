@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:Amir2002_@localhost:5432/delivery
+      - DATABASE_URL=postgresql://postgres:Amir2002_@db:5432/delivery_db
       - JWT_SECRET_KEY=iu3tg6438gr8cx71987ruy1498ruy2498ruy2498ruy
       - ENVIRONMENT=production
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000,http://72.61.116.31:5173,http://72.61.116.31:6000}
