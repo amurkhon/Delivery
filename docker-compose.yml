@@ -7,10 +7,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@Amir(Khan)2002@72.61.116.31:5432/delivery
+      - DATABASE_URL=postgresql://postgres:Amir2002_@localhost:5432/delivery
       - JWT_SECRET_KEY=iu3tg6438gr8cx71987ruy1498ruy2498ruy2498ruy
       - ENVIRONMENT=production
-      - CORS_ORIGINS=${CORS_ORIGINS:-http://72.61.116.31:3000,http://72.61.116.31:5173,http://72.61.116.31:6000}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000,http://72.61.116.31:5173,http://72.61.116.31:6000}
       - UPLOAD_DIR=/app/uploads
     volumes:
       - uploads_data:/app/uploads
@@ -22,7 +22,7 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: Amir2002_
       POSTGRES_DB: delivery_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
