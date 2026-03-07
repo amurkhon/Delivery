@@ -3,7 +3,7 @@ services:
     build: .
     container_name: delivery-api
     restart: always
-    image: python:3.12-slim
+    image: delivery-api:latest
     ports:
       - "8000:8000"
     environment:

@@ -35,7 +35,7 @@ uvicorn main:app --reload
 ### Running with Gunicorn
 
 ```bash
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --preload --bind 0.0.0.0:8000
 ```
 
 Or use the start script (load .env first):
