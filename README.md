@@ -6,7 +6,7 @@ FastAPI backend for the Delivery app - products, orders, authentication, and pro
 
 ```bash
 # Install dependencies
-pip install -r requirements.txt
+pipenv install -r requirements.txt
 
 # Copy env template and configure
 cp .env.example .env
@@ -35,7 +35,7 @@ uvicorn main:app --reload
 ### Running with Gunicorn
 
 ```bash
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --preload --bind 0.0.0.0:8000
+uvicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --preload --bind 0.0.0.0:8000
 ```
 
 Or use the start script (load .env first):
