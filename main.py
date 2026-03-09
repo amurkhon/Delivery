@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 from contextlib import asynccontextmanager
 from alembic.config import Config
@@ -17,6 +18,8 @@ from config import CORS_ORIGINS, IS_PRODUCTION, UPLOAD_DIR, validate_production_
 from database import engine
 
 def run_migrations():
+    if os.getenv("SKIP_MIGRATIONS"):
+        return
     alembic_cfg = Config("alembic.ini")
     command.upgrade(alembic_cfg, "head")
 
