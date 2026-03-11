@@ -29,7 +29,7 @@ UNSAFE_JWT_DEFAULT = "change-this-secret"
 # CORS - comma-separated origins, e.g. "https://app.example.com,https://www.example.com"
 _CORS_ORIGINS_RAW = os.getenv(
     "CORS_ORIGINS",
-    "http://localhost:3000, http://localhost:6001,http://localhost:5173, http://localhost:6000,http://72.61.116.31:3000,http://72.61.116.31:5173,http://72.61.116.31:6000",
+    "http://localhost:3000,http://localhost:8083,exp://192.168.0.140:8083, http://localhost:6001,http://localhost:5173, http://localhost:6000,http://72.61.116.31:3000,http://72.61.116.31:5173,http://72.61.116.31:6000",
 )
 CORS_ORIGINS = [o.strip() for o in _CORS_ORIGINS_RAW.split(",") if o.strip()]
 
