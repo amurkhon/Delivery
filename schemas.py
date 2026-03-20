@@ -152,3 +152,40 @@ class ProductInquiryModel(BaseModel):
                 "status": "available"
             }
         }
+
+class UserModel(BaseModel):
+    id: Optional[int] = None
+    username: str
+    email: str
+    is_staff: bool
+    is_active: bool
+    role: UserRole
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+        json_schema_extra = {
+            "example": {
+                "id": 1,
+                "username": "amir",
+                "email": "amir@gmail.com",
+                "is_staff": False,
+                "is_active": True,
+                "role": "member",
+                "created_at": "2023-01-01T00:00:00",
+                "updated_at": "2023-01-01T00:00:00"
+            }
+        }
+
+
+class UserStatusUpdateModel(BaseModel):
+    is_active: bool
+
+    class Config:
+        from_attributes = True
+        json_schema_extra = {
+            "example": {
+                "is_active": False,
+            }
+        }

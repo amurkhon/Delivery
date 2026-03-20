@@ -11,6 +11,7 @@ from auth_routes import auth_router
 from orders_routes import order_router
 from fastapi_jwt_auth import AuthJWT
 from products_routes import product_router
+from users import user_router
 from schemas import SignInModel, Token
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -66,6 +67,7 @@ def get_config():
 app.include_router(auth_router)
 app.include_router(order_router)
 app.include_router(product_router)
+app.include_router(user_router)
 
 ensure_upload_dir()
 upload_path = Path(UPLOAD_DIR) if Path(UPLOAD_DIR).is_absolute() else Path.cwd() / UPLOAD_DIR
