@@ -7,16 +7,16 @@ from models import UserRole
 
 
 class GetUsersInqueryParams(BaseModel):
-    role: UserRole | None = Query(default="member")
-    is_active: bool | None = Query(default=True)
+    role: UserRole | None = Query(default=None)
+    is_active: bool | None = Query(default=None)
     q: Optional[str] = Query(default=None, description='Search by username or email')
 
     class Config:
         orm_mode = True
         schema_extra = {
             "example": {
-                "role": "member",
-                "is_active": True,
+                "role": None,
+                "is_active": None,
                 "q": "search term",
             }
         }

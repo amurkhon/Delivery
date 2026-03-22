@@ -80,7 +80,7 @@ async def signup(user: SignUpModel, db: Session = Depends(get_db)):
     try:
         role = UserRole(user.role) if user.role else UserRole.member
     except ValueError:
-        raise HTTPException(status_code=400, detail='Invalid role. Must be "admin" or "member"')
+        raise HTTPException(status_code=400, detail='Invalid role. Must be "admin", "member", or "staff"')
     
     new_user = User(
         username=user.username, 

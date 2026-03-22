@@ -15,7 +15,7 @@ from users import user_router
 from schemas import SignInModel, Token
 from fastapi.middleware.cors import CORSMiddleware
 
-from config import CORS_ORIGINS, IS_PRODUCTION, UPLOAD_DIR, validate_production_config
+from config import CORS_ORIGIN_REGEX, CORS_ORIGINS, IS_PRODUCTION, UPLOAD_DIR, validate_production_config
 from database import engine
 
 def run_migrations():
@@ -55,6 +55,7 @@ app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
+    allow_origin_regex=CORS_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -27,11 +27,34 @@ JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "change-this-secret")
 UNSAFE_JWT_DEFAULT = "change-this-secret"
 
 # CORS - comma-separated origins, e.g. "https://app.example.com,https://www.example.com"
-_CORS_ORIGINS_RAW = os.getenv(
-    "CORS_ORIGINS",
-    "http://localhost:3000,http://localhost:8083,exp://192.168.0.140:8083, http://localhost:6001,http://localhost:5173, http://localhost:6000,http://72.61.116.31:3000,http://72.61.116.31:5173,http://72.61.116.31:6000",
+_DEFAULT_CORS_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:6000",
+    "http://localhost:6001",
+    "http://localhost:8083",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:6000",
+    "http://127.0.0.1:6001",
+    "http://127.0.0.1:8083",
+    "exp://192.168.0.140:8083",
+    "http://72.61.116.31:3000",
+    "http://72.61.116.31:5173",
+    "http://72.61.116.31:6000",
+]
+
+_CORS_ORIGINS_RAW = os.getenv("CORS_ORIGINS", "")
+_ENV_CORS_ORIGINS = [o.strip() for o in _CORS_ORIGINS_RAW.split(",") if o.strip()]
+
+# Keep env-configured origins while always allowing local development origins.
+CORS_ORIGINS = list(dict.fromkeys([*_DEFAULT_CORS_ORIGINS, *_ENV_CORS_ORIGINS]))
+
+# Fallback regex for local web dev hosts on any port.
+CORS_ORIGIN_REGEX = os.getenv(
+    "CORS_ORIGIN_REGEX",
+    r"^http?://(localhost|127\.0\.0\.1)(:\d+)?$",
 )
-CORS_ORIGINS = [o.strip() for o in _CORS_ORIGINS_RAW.split(",") if o.strip()]
 
 # Uploads
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")

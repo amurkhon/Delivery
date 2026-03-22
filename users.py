@@ -18,7 +18,7 @@ user_router = APIRouter(
 
 @user_router.get('/all/list', status_code=status.HTTP_200_OK, response_model=list[UserModel])
 async def get_all_users(
-    inquiry: GetUsersInqueryParams,
+    inquiry: GetUsersInqueryParams = Depends(),
     Auth: AuthJWT = Depends(),
     db: Session = Depends(get_db),
 ):
@@ -137,6 +137,8 @@ async def update_user_role(
         raise HTTPException(status_code=400, detail='Admin cannot change own role')
 
     user.role = payload.role
+    # Keep role and staff flag consistent for admin/staff roles.
+    user.is_staff = payload.role in {UserRole.admin, UserRole.staff}
     user.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(user)
